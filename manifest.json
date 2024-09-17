@@ -1,0 +1,7 @@
+{
+  "name": "stimulsoftreport",
+  "description": "Stimulsoft Report plugin",
+  "service": "adapter",
+  "single": 1,
+  "nochannels": 1
+}

@@ -1,0 +1,17 @@
+{
+  "name": "stimulsoftreport",
+  "version": "5.0.1",
+  "description": "Plugin for Stimulsoft Report",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha **/*.test.js --exit"
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+    "expect": "^29.7.0",
+    "mocha": "^10.7.3"
+  },
+  "author": "INTRA",
+  "license": "MIT"
+}
