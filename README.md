@@ -1,0 +1,1 @@
+# Stimulsoft report plugin
