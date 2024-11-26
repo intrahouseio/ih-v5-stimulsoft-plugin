@@ -93,7 +93,7 @@ module.exports = async function(inObj, plugin) {
       let end = parObj.enddatetime.ts;
       if (query.period_type != 'DateAndTime') {
         start = dateutils.getZeroTimeOfDay(parObj.startdatetime.ts);
-        end = dateutils.getZeroTimeOfDay(parObj.enddatetime.ts);
+        end = dateutils.getLastTimeOfDay(parObj.enddatetime.ts);
       }
 
       // const end = Date.now();
