@@ -108,6 +108,7 @@ module.exports = async function(inObj, plugin) {
 
       const reportVars = utils.formReportVars(query.vars);
       query.dn_prop = utils.formDn_prop(reportVars);
+      // query.ids уже д б прицеплено к queryString
 
       query.end = end;
       query.start = start;
@@ -120,6 +121,10 @@ module.exports = async function(inObj, plugin) {
       let arr = [];
       if (sqlStr) {
         arr = await client.query(sqlStr);
+        // Выполнить обратный маппинг id => dn, prop
+        if (useIds) {
+          arr = remap(arr, query);
+        }
       }
 
       // результат преобразовать в массив объектов
@@ -141,5 +146,30 @@ module.exports = async function(inObj, plugin) {
       plugin.log('ERROR: ' + e.message + '.  queryString = ' + queryString);
       return [];
     }
+  }
+
+  function remap(arr, query) {
+    if (!query.ids || !query.dn_prop) return arr;
+
+    const idArr = query.ids.split(',');
+    const dnArr = query.dn_prop.split(',');
+    if (idArr.length != dnArr.length) return arr;
+
+    const idMap = {};
+    try {
+      for (let i = 0; i < idArr.length; i++) {
+        const intId = Number(idArr[i]);
+        const [dn, prop] = dnArr[i].split('.');
+        idMap[intId] = { dn, prop };
+      }
+      arr.forEach(item => {
+        if (item.id && idMap[item.id]) {
+          Object.assign(item, idMap[item.id]);
+        }
+      });
+    } catch (e) {
+      plugin.log('Remap error for query.ids=' + query.ids + ' query.dn_prop=' + query.dn_prop + ' : ' + util.inspect(e));
+    }
+    return arr;
   }
 };
