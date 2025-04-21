@@ -1,6 +1,6 @@
 {
   "name": "stimulsoftreport",
-  "version": "5.0.1",
+  "version": "5.17.5",
   "description": "Plugin for Stimulsoft Report",
   "main": "index.js",
   "scripts": {
