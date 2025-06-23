@@ -5,7 +5,7 @@
  */
 const util = require('util');
 
-// const postgreSQLAdapter = require('./stimulsortPostgreSQLAdapter');
+const index_adapters = require('./index_adapters');
 const intraHistorianAdapter = require('./intraHistorianAdapter');
 
 module.exports = async function(plugin) {
@@ -13,12 +13,22 @@ module.exports = async function(plugin) {
     plugin.log('stimulsoftreport plugin get mes=' + util.inspect(mes));
     if (mes.id && mes.command) {
       const database = mes.command.database;
-      if (database == 'PostgreSQL') {
-        // postgreSQLAdapter(mes, plugin);
-      } else if (database == 'IntraHistorian') {
+
+      if (database == 'IntraHistorian') {
         fromIntraHistorian(mes);
       } else {
-        plugin.send({ id: mes.id, type: 'command', response: 0, error: 'Unknown database ' + database });
+        index_adapters.process(mes.command, onResult);
+        // plugin.send({ id: mes.id, type: 'command', response: 0, error: 'Unknown database ' + database });
+      }
+    } else {
+      plugin.send({ id: mes.id, type: 'command', response: 0, error: 'Expected id and command!' });
+    }
+
+    function onResult(result) {
+      if (result.success) {
+        plugin.send({ id: mes.id, type: 'command', response: 1, payload: result });
+      } else {
+        plugin.send({ id: mes.id, type: 'command', response: 0, error: result.notice});
       }
     }
   });

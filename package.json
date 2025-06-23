@@ -1,17 +1,53 @@
 {
-  "name": "stimulsoftreport",
-  "version": "5.17.5",
-  "description": "Plugin for Stimulsoft Report",
-  "main": "index.js",
-  "scripts": {
-    "test": "mocha **/*.test.js --exit"
-  },
-  "dependencies": {
-  },
-  "devDependencies": {
-    "expect": "^29.7.0",
-    "mocha": "^10.7.3"
-  },
-  "author": "INTRA",
-  "license": "MIT"
+    "name": "stimulsoft-data-adapter",
+    "version": "2025.1.6",
+    "description": "Nodejs data adapter for Stimulsoft Reports.JS",
+    "main": "index.js",
+    "scripts": {
+        "start": "node index.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/stimulsoft/DataAdapters.JS/tree/main/NodejsDataAdapters"
+    },
+    "dependencies": {
+        "limber-firebird-client": "^3.0.17",
+        "mongodb": "^6.11.0",
+        "mssql": "^11.0.1",
+        "mysql2": "^3.11.5",
+        "oracledb": "^6.7.0",
+        "pg": "^8.13.1",
+        "tzdata": "^1.0.42"
+    },
+    "files": [
+        "package.json",
+        "README.md",
+        "index.js",
+        "FirebirdAdapter.js",
+        "MSSQLAdapter.js",
+        "MySQLAdapter.js",
+        "PostgreSQLAdapter.js",
+        "OracleAdapter.js",
+        "MongoDBAdapter.js"
+    ],
+    "author": {
+        "name": "Stimulsoft",
+        "url": "http://www.stimulsoft.com"
+    },
+    "maintainers": [
+        {
+            "name": "Stimulsoft",
+            "email": "info@stimulsoft.com",
+            "url": "http://www.stimulsoft.com"
+        }
+    ],
+    "contributors": [
+        {
+            "name": "Stimulsoft",
+            "email": "info@stimulsoft.com",
+            "url": "http://www.stimulsoft.com"
+        }
+    ],
+    "license": "Closed Source",
+    "homepage": "https://github.com/stimulsoft/DataAdapters.JS/tree/main/NodejsDataAdapters"
 }
